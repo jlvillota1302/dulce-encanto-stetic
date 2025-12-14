@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dulce Encanto Stetic | Agenda tu cita</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Ir a inicio">
+        <img src="img/logo.jpeg" alt="Logo Dulce Encanto Stetic" class="brand-logo">
+        <div class="brand-text">
+          <h1>Dulce Encanto Stetic</h1>
+        </div>
+      </a>
+
+      <!-- Hamburger (solo móvil) -->
+      <!-- menú lateral removido: botón hamburguesa eliminado -->
+
+      <!-- Desktop Nav -->
+      <nav class="nav nav-desktop">
+        <a class="nav-link active" href="index.html">Inicio</a>
+        <a class="nav-link" href="servicios.html">Servicios</a>
+        <a class="nav-link" href="galeria.html">Galería</a>
+        <a class="nav-cta" id="waHeaderBtn" href="#" rel="noopener">WhatsApp</a>
+        <!-- botón de cierre del menú lateral eliminado -->
+
+      </nav>
+    </div>
+    <!-- menú móvil completamente eliminado -->
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h2>Tu bienestar, tu mejor versión ✨</h2>
+        <p>
+          Selecciona una fecha en el calendario y reserva tu cita en segundos.
+          También puedes escribirnos directo por WhatsApp.
+        </p>
+
+        <ul class="hero-bullets">
+          <li>Confirmación por WhatsApp</li>
+          <li>Servicios faciales y corporales</li>
+          <li>Atención personalizada</li>
+        </ul>
+
+        <div class="hero-actions">
+          <button class="btn" id="goToFormBtn">Reservar ahora</button>
+          <a class="btn btn-ghost" href="galeria.html">Ver resultados</a>
+        </div>
+
+        <div class="notice">
+          <strong>Ubicación:</strong> Barrio Miraflores, Dg16c#1-35<br/>
+          <strong>Instagram:</strong> @dulceencanto_estetic
+        </div>
+      </div>
+
+      <div class="hero-media">
+        <img src="img/tratamientos-corporales.jpg" alt="Tratamientos corporales" class="hero-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Main -->
+  <main class="container main-grid" id="main">
+    <!-- Calendar -->
+    <section class="card">
+      <div class="card-head">
+        <h3>Calendario</h3>
+        <div class="cal-controls">
+          <button class="icon-btn" id="prevMonth" aria-label="Mes anterior">‹</button>
+          <div class="cal-month" id="monthLabel">—</div>
+          <button class="icon-btn" id="nextMonth" aria-label="Mes siguiente">›</button>
+        </div>
+      </div>
+
+      <div class="calendar">
+        <div class="cal-weekdays" id="weekdays"></div>
+        <div class="cal-grid" id="calendarGrid"></div>
+      </div>
+
+      <div class="cal-footer">
+        <div>
+          <span class="badge badge-soft">Fecha seleccionada:</span>
+          <strong id="selectedDateLabel">Ninguna</strong>
+        </div>
+        <button class="btn btn-ghost" id="todayBtn">Hoy</button>
+      </div>
+    </section>
+
+    <!-- Booking Form -->
+    <section class="card" id="bookingCard">
+      <div class="card-head">
+        <h3>Reserva rápida</h3>
+        <p class="muted">Completa esto y te generamos el mensaje listo para WhatsApp.</p>
+      </div>
+
+      <form id="bookingForm" class="form">
+        <div class="form-row">
+          <label>
+            Nombre *
+            <input type="text" name="name" placeholder="Tu nombre" required>
+          </label>
+
+          <label>
+            Teléfono *
+            <input type="tel" name="phone" placeholder="Ej: 3120000000" required>
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            Servicio *
+            <select name="service" required>
+              <option value="" selected disabled>Selecciona…</option>
+              <option>Limpieza facial profunda</option>
+              <option>Microdermoabrasión</option>
+              <option>Plasma facial / Vitaminas</option>
+              <option>Tratamiento contra el acné</option>
+              <option>Reducción de medidas</option>
+              <option>Mesoterapia</option>
+              <option>Masaje relajante</option>
+            </select>
+          </label>
+
+          <label>
+            Hora *
+            <select name="time" required>
+              <option value="" selected disabled>Selecciona…</option>
+              <option>09:00 AM</option>
+              <option>10:00 AM</option>
+              <option>11:00 AM</option>
+              <option>02:00 PM</option>
+              <option>03:00 PM</option>
+              <option>04:00 PM</option>
+              <option>05:00 PM</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          Notas (opcional)
+          <textarea name="notes" rows="3" placeholder="Ej: Primera vez, piel sensible, etc."></textarea>
+        </label>
+
+        <label class="inline">
+          <input type="checkbox" name="saveLocal" checked>
+          Guardar esta reserva en el dispositivo (pruebas)
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="btn">Generar y abrir WhatsApp</button>
+          <button type="button" class="btn btn-ghost" id="clearBtn">Limpiar</button>
+        </div>
+
+        <!-- ✅ Mensajes automáticos integrados -->
+        <div class="divider"></div>
+
+        <div class="mini">
+          <div class="mini-head">
+            <h4>Mensajes automáticos</h4>
+            <span class="muted">Se generan con tu reserva</span>
+          </div>
+
+          <label>
+            Mensaje de confirmación (para enviar al cliente)
+            <textarea id="confirmMsg" rows="7" readonly placeholder="Aquí aparecerá el mensaje de confirmación..."></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" id="copyConfirmBtn">Copiar confirmación</button>
+            <a class="btn" id="openConfirmWaBtn" href="#" target="_blank" rel="noopener">Abrir WhatsApp con confirmación</a>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="mini">
+          <div class="mini-head">
+            <h4>Reservas guardadas</h4>
+            <button class="link-btn" id="clearAllBookings" type="button">Borrar todo</button>
+          </div>
+          <div id="bookingsList" class="bookings"></div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- WhatsApp Floating Button -->
+  <a class="wa-float" id="waFloatBtn" href="#" aria-label="Agendar por WhatsApp" rel="noopener">
+    WhatsApp
+  </a>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Dulce Encanto Stetic • Todos los derechos reservados</p>
+      <p class="muted">Hecho con ❤️ para agendar sin complicaciones</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
