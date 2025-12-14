@@ -101,6 +101,30 @@
       }
     });
 
+    // Delegación adicional por si los listeners directos no se engancharon
+    document.addEventListener('click', (e) => {
+      // botón de cierre
+      if (e.target.closest && e.target.closest('.nav-close')) {
+        console.debug('[DE] delegated nav-close click');
+        closeMenu();
+        return;
+      }
+
+      // overlay
+      if (e.target.id === 'navOverlay' || e.target.closest('#navOverlay')) {
+        console.debug('[DE] delegated overlay click');
+        closeMenu();
+        return;
+      }
+
+      // enlaces dentro del drawer
+      if (e.target.closest && e.target.closest('#mobileNav a')) {
+        console.debug('[DE] delegated drawer link click');
+        closeMenu();
+        return;
+      }
+    }, { capture: true });
+
     // Si cambiamos a desktop, forzamos cerrado
     const updateMode = () => {
       if (!mql.matches) {
