@@ -105,6 +105,12 @@ img{ max-width:100%; display:block; }
   z-index: 45;
 }
 
+/* Por defecto el overlay y el drawer no deben mostrarse fuera del modo móvil.
+   Usamos el atributo [hidden] para controlar la visibilidad desde JS. */
+.nav-overlay{ display:none; }
+.nav-mobile{ display:none; }
+.nav-overlay[hidden], .nav-mobile[hidden] { display: none !important; }
+
 .nav-mobile{
   position: fixed;
   top: 0;
@@ -472,7 +478,8 @@ input:focus, select:focus, textarea:focus{
   .cards-grid{ grid-template-columns: 1fr 1fr; }
   .gallery{ grid-template-columns: 1fr 1fr 1fr; }
 
-  /* Show hamburger, hide desktop nav */
+  /* Mostrar hamburguesa y ocultar la navegación de escritorio en móviles.
+     El drawer se encargará de mostrar los enlaces. */
   .nav-toggle{ display:flex; }
   .nav-desktop{ display:none; }
 }

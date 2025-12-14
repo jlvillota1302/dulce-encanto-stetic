@@ -33,7 +33,74 @@
   };
 
   // ====== Mobile Nav ======
-  // Mobile nav removed: no function required (menu lateral eliminado en HTML)
+  const initMobileNav = () => {
+    const toggle = document.getElementById("navToggle");
+    const overlay = document.getElementById("navOverlay");
+    const drawer = document.getElementById("mobileNav");
+
+    // Si no existen en esta página, salimos sin error
+    if (!toggle || !overlay || !drawer) return;
+
+    // Asegurar estado inicial cerrado
+    drawer.hidden = true;
+    overlay.hidden = true;
+    toggle.setAttribute("aria-expanded", "false");
+
+    // Media query para decidir si el modo móvil está activo
+    const mql = window.matchMedia('(max-width: 980px)');
+
+    const openMenu = () => {
+      // Sólo abrir si estamos en modo móvil
+      if (!mql.matches) return;
+      drawer.hidden = false;
+      overlay.hidden = false;
+      toggle.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+    };
+
+    const closeMenu = () => {
+      drawer.hidden = true;
+      overlay.hidden = true;
+      toggle.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    };
+
+    toggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      expanded ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener("click", () => closeMenu());
+
+    // Todos los botones con clase .nav-close (incluye el del drawer)
+    document.querySelectorAll(".nav-close").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeMenu();
+      });
+    });
+
+    // Cerrar al pulsar cualquier enlace dentro del drawer
+    drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => closeMenu()));
+
+    // Escape para cerrar
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+
+    // Si cambiamos a desktop, forzamos cerrado
+    const updateMode = () => {
+      if (!mql.matches) {
+        closeMenu();
+      }
+    };
+
+    updateMode();
+    if (typeof mql.addEventListener === 'function') mql.addEventListener('change', updateMode);
+    else if (typeof mql.addListener === 'function') mql.addListener(updateMode);
+  };
 
 
   // ====== WhatsApp Buttons ======
@@ -341,6 +408,7 @@
 
   // ====== Init ======
   setYear();
+  initMobileNav();
   wireWhatsAppButtons();
   initCalendar();
   initBookingForm();

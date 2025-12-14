@@ -17,7 +17,9 @@
         </div>
       </a>
 
-      <!-- menú lateral removido: botón hamburguesa eliminado -->
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
 
       <nav class="nav nav-desktop">
         <a class="nav-link" href="index.html">Inicio</a>
@@ -27,7 +29,17 @@
       </nav>
     </div>
 
-    <!-- menú móvil completamente eliminado -->
+    <div class="nav-overlay" id="navOverlay" hidden></div>
+    <nav class="nav-mobile" id="mobileNav" hidden>
+      <div class="nav-mobile-head">
+        <div class="nav-mobile-title">Menú</div>
+        <button class="nav-close" id="navClose" aria-label="Cerrar menú">×</button>
+      </div>
+      <a class="nav-link" href="index.html">Inicio</a>
+      <a class="nav-link" href="servicios.html">Servicios</a>
+      <a class="nav-link active" href="galeria.html">Galería</a>
+      <a class="nav-cta" id="waHeaderBtnMobile" href="#" rel="noopener">WhatsApp</a>
+    </nav>
   </header>
 
   <main class="container page">
