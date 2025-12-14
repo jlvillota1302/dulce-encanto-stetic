@@ -41,13 +41,16 @@
     // Si no existen en esta página, salimos sin error
     if (!toggle || !overlay || !drawer) return;
 
-    // Asegurar estado inicial cerrado
-    drawer.hidden = true;
-    overlay.hidden = true;
-    toggle.setAttribute("aria-expanded", "false");
+  // DEBUG: indicar que init se ejecutó y elementos encontrados
+  console.debug('[DE] initMobileNav — found:', { toggle: !!toggle, overlay: !!overlay, drawer: !!drawer });
 
-    // Media query para decidir si el modo móvil está activo
-    const mql = window.matchMedia('(max-width: 980px)');
+  // Asegurar estado inicial cerrado
+  try { drawer.hidden = true; } catch (e) { console.debug('[DE] drawer.hidden init error', e); }
+  try { overlay.hidden = true; } catch (e) { console.debug('[DE] overlay.hidden init error', e); }
+  try { toggle.setAttribute("aria-expanded", "false"); } catch (e) { /* ignore */ }
+
+  // Media query para decidir si el modo móvil está activo
+  const mql = window.matchMedia('(max-width: 980px)');
 
     const openMenu = () => {
       // Sólo abrir si estamos en modo móvil
@@ -68,16 +71,21 @@
     toggle.addEventListener("click", (e) => {
       e.preventDefault();
       const expanded = toggle.getAttribute("aria-expanded") === "true";
+      console.debug('[DE] toggle click — expanded', expanded, 'mql.matches', mql.matches);
       expanded ? closeMenu() : openMenu();
     });
 
-    overlay.addEventListener("click", () => closeMenu());
+    overlay.addEventListener("click", () => {
+      console.debug('[DE] overlay click — closing');
+      closeMenu();
+    });
 
     // Todos los botones con clase .nav-close (incluye el del drawer)
     document.querySelectorAll(".nav-close").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
+        console.debug('[DE] nav-close clicked');
         closeMenu();
       });
     });
@@ -87,7 +95,10 @@
 
     // Escape para cerrar
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMenu();
+      if (e.key === "Escape") {
+        console.debug('[DE] Escape pressed — closing drawer');
+        closeMenu();
+      }
     });
 
     // Si cambiamos a desktop, forzamos cerrado
@@ -97,7 +108,9 @@
       }
     };
 
-    updateMode();
+  // Llamada inicial para forzar estado correcto según tamaño
+  console.debug('[DE] initMobileNav — initial mql.matches =', mql.matches);
+  updateMode();
     if (typeof mql.addEventListener === 'function') mql.addEventListener('change', updateMode);
     else if (typeof mql.addListener === 'function') mql.addListener(updateMode);
   };
