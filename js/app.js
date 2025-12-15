@@ -142,8 +142,8 @@
 
   // ====== WhatsApp Buttons ======
   const wireWhatsAppButtons = () => {
-    const baseMsg =
-`Hola ✨ Quiero agendar una cita en *Dulce Encanto Stetic*.
+  const baseMsg =
+`Hola ✨ Quiero agendar una cita en *Dulce Encanto Estétic*.
 ¿Me compartes disponibilidad para hoy o esta semana?
 📍 Barrio Miraflores`;
 
@@ -335,7 +335,7 @@
       // Mensaje de RESERVA (cliente -> negocio)
       const msgLines = [
         `Hola 😊 Soy *${name}*.`,
-        `Quisiera agendar una cita en *Dulce Encanto Stetic*.`,
+  `Quisiera agendar una cita en *Dulce Encanto Estétic*.`,
         ``,
         `📅 *Fecha:* ${prettyDate(selectedDate)}`,
         `⏰ *Hora:* ${time}`,
@@ -350,7 +350,7 @@
       // ✅ Mensaje AUTOMÁTICO de CONFIRMACIÓN (negocio -> cliente)
       const confirmLines = [
         `Hola ✨`,
-        `Gracias por agendar tu cita en *Dulce Encanto Stetic* 💆‍♀️🌿`,
+  `Gracias por agendar tu cita en *Dulce Encanto Estétic* 💆‍♀️🌿`,
         ``,
         `Te confirmamos tu cita con los siguientes detalles:`,
         ``,
