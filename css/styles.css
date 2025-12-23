@@ -414,11 +414,42 @@ input:focus, select:focus, textarea:focus{
 .service-body h3{ margin:0 0 6px; }
 .service-body p{ margin:0 0 10px; color: var(--muted); }
 
+/* Mejoras para botones "Agendar" en tarjetas */
+.service-card{ display:flex; flex-direction:column; }
+.service-body{ padding: 12px; display:flex; flex-direction:column; gap:10px; flex:1; }
+.service-body .btn{ padding: 10px 14px; border-radius: 12px; }
+
+.btn-agendar{ display:inline-flex; align-items:center; gap:10px; padding:8px 12px; border-radius: 12px; color: var(--gold-2); background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)); border: 1px solid rgba(201,162,74,.28); font-weight:800; box-shadow: none; transition: transform .14s ease, box-shadow .14s ease, background .14s ease, color .14s ease; }
+.btn-agendar .btn-icon{ width:16px; height:16px; display:inline-block; fill: currentColor; opacity:.95; }
+.btn-agendar:hover{ background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: #fff; box-shadow: 0 10px 24px rgba(201,162,74,.25); transform: translateY(-3px); }
+.btn-agendar:active{ transform: translateY(-1px) scale(.995); }
+.btn-agendar:focus-visible{ outline: none; box-shadow: 0 0 0 4px rgba(201,162,74,.18); border-color: var(--gold-2); }
+
+/* Asegurar que el botón quede abajo */
+.service-body .btn-agendar{ margin-top: auto; justify-self:start; }
+
+
 .gallery{
   display:grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
+
+.gallery-controls{ margin-bottom: 12px; display:flex; justify-content:flex-start; }
+.gallery-filters{ display:flex; gap:8px; flex-wrap:wrap; }
+.filter-btn{
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--muted);
+}
+.filter-btn:hover{ background: rgba(201,162,74,.06); color: var(--text); }
+.filter-btn.active{ background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: #fff; box-shadow: 0 10px 24px rgba(201,162,74,.35); }
+
+.gallery-item.hidden{ display:none; }
 .gallery-item{
   margin:0;
   background: var(--card);
@@ -452,7 +483,10 @@ input:focus, select:focus, textarea:focus{
   max-height: 72vh;
   border-radius: 18px;
   border: 1px solid rgba(255,255,255,.2);
+  cursor: zoom-in;
+  transition: transform .18s ease, box-shadow .18s ease;
 }
+.lightbox img:active{ transform: scale(.995); }
 .lightbox-cap{
   color:#fff;
   margin-top: 10px;
@@ -472,18 +506,41 @@ input:focus, select:focus, textarea:focus{
   cursor:pointer;
 }
 
-.wa-float{
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  z-index: 30;
-  text-decoration:none;
-  color:#fff;
-  background: #25D366;
-  padding: 12px 14px;
-  border-radius: 999px;
-  box-shadow: 0 14px 30px rgba(0,0,0,.18);
-  font-weight: 800;
+/* small accessibility helper */
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+/* header icons keep small size */
+.nav-cta .wa-svg{ width:18px; height:18px; vertical-align:middle; margin-right:8px; fill: currentColor; }
+.wa-label{ vertical-align:middle; }
+@media (max-width:520px){ .wa-label{ display:none; } }
+
+/* ===== Pricing table styles ===== */
+.pricing{ margin: 36px 0 18px; }
+.pricing-inner{ display:flex; gap:18px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
+.pricing-table-wrap{ flex:1 1 560px; }
+.table-wrap{ background: var(--card); border: 1px solid var(--line); padding: 14px; border-radius: var(--radius2); box-shadow: var(--shadow); }
+.table-wrap h3{ margin-top:0; }
+.table-wrap .table-wrap p{ margin:0 0 12px; }
+.table-wrap .table-wrap .pricing-actions{ margin-top:12px; }
+.table-wrap .price-note{ margin-top:10px; }
+.price-table{ width:100%; border-collapse:collapse; font-size: 15px; }
+.price-table caption{ text-align:left; margin-bottom:8px; font-weight:700; }
+.price-table th, .price-table td{ padding:10px 12px; border: 1px solid var(--line); text-align:left; }
+.price-table th{ background: linear-gradient(135deg, rgba(201,162,74,.06), rgba(201,162,74,.02)); }
+.price-category td{ background: rgba(201,162,74,.04); font-weight:700; padding:12px; }
+.price-table td:last-child{ text-align:right; white-space:nowrap; }
+.price-note{ margin-top: 12px; font-size: 14px; }
+
+@media (max-width: 800px){
+  .pricing-inner{ flex-direction:column-reverse; }
+  .price-ref{ width:100%; max-width:none; }
+  .table-wrap{ width:100%; overflow:auto; }
+}
+
+@media print{
+  .btn, .nav, .nav-mobile, .nav-toggle, .footer{ display:none !important; }
+  .price-ref{ display:none; }
+  .price-table{ border: 1px solid #333; }
 }
 
 .footer{
@@ -497,6 +554,21 @@ input:focus, select:focus, textarea:focus{
   justify-content:space-between;
   align-items:center;
   flex-wrap:wrap;
+}
+.footer-meta{ display:flex; gap:12px; align-items:center; }
+.version-badge{
+  display:inline-block;
+  background: linear-gradient(135deg, rgba(0,0,0,.04), rgba(0,0,0,.02));
+  color: var(--muted);
+  border: 1px solid rgba(0,0,0,.06);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight:700;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+}
+@media (max-width:520px){
+  .version-badge{ font-size:12px; padding:5px 8px; }
 }
 .footer p{ margin:0; }
 

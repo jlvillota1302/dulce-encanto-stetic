@@ -1,8 +1,10 @@
+/* Author: Jose Luis Villota | Version: 1.0.0 */
 (() => {
   // ====== CONFIG ======
   const WHATSAPP_NUMBER = "573122090057"; // 3122090057 (CO)
 
   const STORAGE_KEY = "dulce_encanto_bookings_v1";
+  const APP_VERSION = '1.0.0';
 
   // ====== Helpers ======
   const $ = (sel) => document.querySelector(sel);
@@ -140,21 +142,7 @@
   };
 
 
-  // ====== WhatsApp Buttons ======
-  const wireWhatsAppButtons = () => {
-  const baseMsg =
-`Hola ✨ Quiero agendar una cita en *Dulce Encanto Estétic*.
-¿Me compartes disponibilidad para hoy o esta semana?
-📍 Barrio Miraflores`;
 
-    const headerBtn = $("#waHeaderBtn");
-    const headerBtnMobile = $("#waHeaderBtnMobile");
-    const floatBtn = $("#waFloatBtn");
-
-    if (headerBtn) headerBtn.href = buildWaLink(baseMsg);
-    if (headerBtnMobile) headerBtnMobile.href = buildWaLink(baseMsg);
-    if (floatBtn) floatBtn.href = buildWaLink(baseMsg);
-  };
 
   // ====== Calendar (solo si existe en la página) ======
   const initCalendar = () => {
@@ -408,46 +396,122 @@
 
     if (!lb || !lbImg || !lbCap) return;
 
-    const items = $$(".gallery-item");
+    const items = Array.from(document.querySelectorAll('.gallery-item'));
     if (items.length === 0) return;
 
-    const open = (src, cap) => {
+    let currentIndex = null;
+    let prevActive = null;
+
+    const showIndex = (idx) => {
+      if (idx < 0 || idx >= items.length) return;
+      currentIndex = idx;
+      const fig = items[currentIndex];
+      const img = fig.querySelector('img');
+      const cap = fig.querySelector('figcaption')?.textContent || '';
+      const src = img.dataset.full || img.src;
       lbImg.src = src;
-      lbCap.textContent = cap || "";
-      lb.classList.add("show");
-      lb.setAttribute("aria-hidden", "false");
+      lbImg.alt = cap || img.alt || '';
+      lbCap.textContent = cap;
+    };
+
+    const open = (idx) => {
+      prevActive = document.activeElement;
+      showIndex(idx);
+      lb.classList.add('show');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden'; // evitar scroll de fondo
+      closeBtn?.focus();
     };
 
     const close = () => {
-      lb.classList.remove("show");
-      lb.setAttribute("aria-hidden", "true");
-      lbImg.src = "";
-      lbCap.textContent = "";
+      lb.classList.remove('show');
+      lb.setAttribute('aria-hidden', 'true');
+      lbImg.src = '';
+      lbCap.textContent = '';
+      document.body.style.overflow = '';
+      currentIndex = null;
+      if (prevActive && typeof prevActive.focus === 'function') prevActive.focus();
     };
 
-    items.forEach(fig => {
-      fig.addEventListener("click", () => {
-        const img = fig.querySelector("img");
-        const cap = fig.querySelector("figcaption")?.textContent || "";
-        if (img) open(img.src, cap);
+    // Abrir lightbox al hacer click en una miniatura
+    items.forEach((fig, i) => {
+      fig.addEventListener('click', () => {
+        open(i);
       });
     });
 
-    closeBtn?.addEventListener("click", close);
-    lb.addEventListener("click", (e) => {
+    // Cerrar con el botón
+    closeBtn?.addEventListener('click', close);
+
+    // Click fuera del contenido cierra
+    lb.addEventListener('click', (e) => {
       if (e.target === lb) close();
     });
 
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") close();
+    // Click en la imagen avanza a la siguiente
+    lbImg.addEventListener('click', () => {
+      if (currentIndex !== null) showIndex((currentIndex + 1) % items.length);
+    });
+
+    // Navegación por teclado: Esc cerrar, flechas avanzar/retroceder
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('show')) return;
+      if (e.key === 'Escape') return close();
+      if (e.key === 'ArrowRight') return showIndex(Math.min(items.length - 1, (currentIndex ?? 0) + 1));
+      if (e.key === 'ArrowLeft') return showIndex(Math.max(0, (currentIndex ?? 0) - 1));
+    });
+  };
+
+  // ====== Gallery Filters ======
+  const initGalleryFilters = () => {
+    const controls = document.querySelector('.gallery-filters');
+    const items = Array.from(document.querySelectorAll('.gallery-item'));
+    if (!controls || items.length === 0) return;
+
+    const buttons = Array.from(controls.querySelectorAll('.filter-btn'));
+
+    const setActive = (btn) => {
+      buttons.forEach(b => {
+        const active = b === btn;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-pressed', String(active));
+      });
+    };
+
+    const filter = (category) => {
+      items.forEach(it => {
+        const cat = it.dataset.category;
+        if (category === 'all' || cat === category) it.classList.remove('hidden');
+        else it.classList.add('hidden');
+      });
+    };
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const cat = btn.dataset.filter;
+        setActive(btn);
+        filter(cat);
+      });
+    });
+  };
+
+  // ====== Pricing actions ======
+  const initPricing = () => {
+    const printBtn = document.getElementById('printPriceBtn');
+    if (!printBtn) return;
+    printBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.print();
     });
   };
 
   // ====== Init ======
   setYear();
   initMobileNav();
-  wireWhatsAppButtons();
   initCalendar();
   initBookingForm();
   initLightbox();
+  initGalleryFilters();
+  initPricing();
 })();

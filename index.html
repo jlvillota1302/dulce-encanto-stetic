@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Author & Version (meta) -->
+  <meta name="author" content="Jose Luis Villota" />
+  <meta name="version" content="1.0.0" />
   <title>Dulce Encanto Estétic | Agenda tu cita</title>
   <link rel="stylesheet" href="css/styles.css"/>
+  <!-- Author: Jose Luis Villota | Version: 1.0.0 -->
 </head>
 <body>
   <!-- Header -->
@@ -27,7 +31,7 @@
         <a class="nav-link active" href="index.html">Inicio</a>
         <a class="nav-link" href="servicios.html">Servicios</a>
         <a class="nav-link" href="galeria.html">Galería</a>
-        <a class="nav-cta" id="waHeaderBtn" href="#" rel="noopener">WhatsApp</a>
+
         <!-- botón de cierre del menú lateral eliminado -->
 
       </nav>
@@ -42,7 +46,7 @@
       <a class="nav-link active" href="index.html">Inicio</a>
       <a class="nav-link" href="servicios.html">Servicios</a>
       <a class="nav-link" href="galeria.html">Galería</a>
-      <a class="nav-cta" id="waHeaderBtnMobile" href="#" rel="noopener">WhatsApp</a>
+
     </nav>
   </header>
 
@@ -50,7 +54,7 @@
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <h2>Tu bienestar, tu mejor versión ✨</h2>
+        <h2>Tu bienestar, tu mejor versión </h2>
         <p>
           Selecciona una fecha en el calendario y reserva tu cita en segundos.
           También puedes escribirnos directo por WhatsApp.
@@ -64,7 +68,7 @@
 
         <div class="hero-actions">
           <button class="btn" id="goToFormBtn">Reservar ahora</button>
-          <a class="btn btn-ghost" href="galeria.html">Ver resultados</a>
+          <a class="btn btn-ghost" href="galeria.html">Ver Galeria</a>
         </div>
 
         <div class="notice">
@@ -132,12 +136,21 @@
             <select name="service" required>
               <option value="" selected disabled>Selecciona…</option>
               <option>Limpieza facial profunda</option>
+              <option>Hidratación profunda</option>
+              <option>Derma Pen</option>
+              <option>Eliminacion de verrugas y lunares</option>
+              <option>Ultrasonido facial</option>
+              <option>Drenaje linfático</option>
+              <option>Maderoterapia facial</option>
+              <option>Despigmentación</option>
+              <option>Anti-Acné</option>
+              <option>Anti-rojeces</option>
+              <option>BB Glow</option>
+              <option>Mesoterapia facial</option>
               <option>Microdermoabrasión</option>
               <option>Plasma facial / Vitaminas</option>
-              <option>Tratamiento contra el acné</option>
               <option>Reducción de medidas</option>
               <option>Mesoterapia</option>
-              <option>Masaje relajante</option>
             </select>
           </label>
 
@@ -204,15 +217,15 @@
     </section>
   </main>
 
-  <!-- WhatsApp Floating Button -->
-  <a class="wa-float" id="waFloatBtn" href="#" aria-label="Agendar por WhatsApp" rel="noopener">
-    WhatsApp
-  </a>
+
 
   <footer class="footer">
     <div class="container footer-inner">
-  <p>© <span id="year"></span> Dulce Encanto Estétic • Todos los derechos reservados</p>
-      <p class="muted">Hecho con ❤️ para agendar sin complicaciones</p>
+      <p>© <span id="year"></span> Dulce Encanto Estétic • Todos los derechos reservados</p>
+      <div class="footer-meta">
+        <p class="muted">Hecho con ❤️ para agendar sin complicaciones</p>
+        <span class="version-badge" title="Versión 1.0.0" aria-hidden="true">v1.0.0</span>
+      </div>
     </div>
   </footer>
 

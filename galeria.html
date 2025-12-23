@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Author & Version (meta) -->
+  <meta name="author" content="Jose Luis Villota" />
+  <meta name="version" content="1.0.0" />
   <title>Galería | Dulce Encanto Estétic</title>
   <link rel="stylesheet" href="css/styles.css"/>
+  <!-- Author: Jose Luis Villota | Version: 1.0.0 -->
 </head>
 <body>
   <header class="site-header">
@@ -25,7 +29,7 @@
         <a class="nav-link" href="index.html">Inicio</a>
         <a class="nav-link" href="servicios.html">Servicios</a>
         <a class="nav-link active" href="galeria.html">Galería</a>
-        <a class="nav-cta" id="waHeaderBtn" href="#" rel="noopener">WhatsApp</a>
+
       </nav>
     </div>
 
@@ -38,73 +42,109 @@
       <a class="nav-link" href="index.html">Inicio</a>
       <a class="nav-link" href="servicios.html">Servicios</a>
       <a class="nav-link active" href="galeria.html">Galería</a>
-      <a class="nav-cta" id="waHeaderBtnMobile" href="#" rel="noopener">WhatsApp</a>
+
     </nav>
   </header>
 
   <main class="container page">
-    <section class="page-head">
-      <h2>Galería</h2>
-      <p class="muted">Una muestra de nuestros servicios y resultados.</p>
-    </section>
+    <section>
+      <div class="gallery-controls">
+        <div class="gallery-filters" role="tablist" aria-label="Filtrar galería">
+          <button class="filter-btn active" data-filter="all" aria-pressed="true">Todos</button>
+          <button class="filter-btn" data-filter="faciales" aria-pressed="false">Faciales</button>
+          <button class="filter-btn" data-filter="corporales" aria-pressed="false">Corporales</button>
+          <button class="filter-btn" data-filter="maquillaje" aria-pressed="false">Maquillaje</button>
+        </div>
+      </div>
 
-    <section class="gallery">
-      <figure class="gallery-item">
-  <img src="img/inicio.jpg" alt="Bienvenida Dulce Encanto Estétic">
-        <figcaption>Bienvenida</figcaption>
-      </figure>
+      <section class="gallery" id="galleryGrid">
+        <figure class="gallery-item" data-category="corporales">
+          <img src="img/inicio.jpg" alt="Bienvenida Dulce Encanto Estétic">
+          <figcaption>Bienvenida</figcaption>
+        </figure>
 
-      <figure class="gallery-item">
-        <img src="img/limpieza-facial-profunda.jpg" alt="Limpieza facial profunda">
-        <figcaption>Limpieza facial profunda</figcaption>
-      </figure>
+        <figure class="gallery-item" data-category="faciales">
+          <img src="img/limpieza-facial-profunda.jpg" alt="Limpieza facial profunda">
+          <figcaption>Limpieza facial profunda</figcaption>
+        </figure>
 
-      <figure class="gallery-item">
-        <img src="img/microdermoabrasion.jpeg" alt="Microdermoabrasión">
-        <figcaption>Microdermoabrasión</figcaption>
-      </figure>
+        <figure class="gallery-item" data-category="faciales">
+          <img src="img/microdermoabrasion.jpeg" alt="Microdermoabrasión">
+          <figcaption>Microdermoabrasión</figcaption>
+        </figure>
 
-      <figure class="gallery-item">
-        <img src="img/plasma-facial.jpeg" alt="Plasma facial / Vitaminas">
-        <figcaption>Plasma facial / Vitaminas</figcaption>
-      </figure>
+        <figure class="gallery-item" data-category="faciales">
+          <img src="img/plasma-facial.jpeg" alt="Plasma facial / Vitaminas">
+          <figcaption>Plasma facial / Vitaminas</figcaption>
+        </figure>
 
-      <figure class="gallery-item">
-        <img src="img/mesoterapia.jpeg" alt="Mesoterapia">
-        <figcaption>Mesoterapia</figcaption>
-      </figure>
+        <figure class="gallery-item" data-category="faciales">
+          <img src="img/mesoterapia.jpeg" alt="Mesoterapia">
+          <figcaption>Mesoterapia</figcaption>
+        </figure>
 
-      <figure class="gallery-item">
-        <img src="img/reduccion-medidas.jpg" alt="Reducción de medidas">
-        <figcaption>Reducción de medidas</figcaption>
-      </figure>
+        <figure class="gallery-item" data-category="corporales">
+          <img src="img/reduccion-medidas.jpg" alt="Reducción de medidas">
+          <figcaption>Reducción de medidas</figcaption>
+        </figure>
 
-      <figure class="gallery-item">
-        <img src="img/tratamiento-contra-acne.jpg" alt="Tratamiento contra el acné">
-        <figcaption>Tratamiento contra el acné</figcaption>
-      </figure>
+        <figure class="gallery-item" data-category="maquillaje">
+          <img src="img/maquillaje.jpeg" alt="Maquillaje">
+          <figcaption>Maquillaje</figcaption>
+        </figure>
 
-      <figure class="gallery-item">
-        <img src="img/tratamientos-corporales.jpg" alt="Tratamientos corporales">
-        <figcaption>Tratamientos corporales</figcaption>
-      </figure>
-    </section>
+        <figure class="gallery-item" data-category="maquillaje">
+          <img src="img/maquillaje-gala.jpeg" alt="Maquillaje de gala">
+          <figcaption>Maquillaje de gala</figcaption>
+        </figure>
 
-    <div class="lightbox" id="lightbox" aria-hidden="true">
-      <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">×</button>
-      <img id="lightboxImg" alt="Vista ampliada">
-      <div class="lightbox-cap" id="lightboxCap"></div>
-    </div>
-  </main>
+        <figure class="gallery-item" data-category="maquillaje">
+          <img src="img/maquillaje-social.jpeg" alt="Maquillaje social">
+          <figcaption>Maquillaje social</figcaption>
+        </figure>
 
-  <a class="wa-float" id="waFloatBtn" href="#" aria-label="Agendar por WhatsApp" rel="noopener">WhatsApp</a>
+        <figure class="gallery-item" data-category="corporales">
+          <img src="img/tonificacion-gluteo.jpeg" alt="Tonificación glútea">
+          <figcaption>Tonificación glútea</figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-category="corporales">
+          <img src="img/tratamientos-corporales.jpg" alt="Tratamientos corporales">
+          <figcaption>Tratamientos corporales</figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-category="corporales">
+          <img src="img/tratamientos-corporales2.JPG" alt="Tratamientos corporales 2">
+          <figcaption>Tratamientos corporales (varios)</figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-category="faciales">
+          <img src="img/hidratacion-facial.jpeg" alt="Hidratación facial">
+          <figcaption>Hidratación facial</figcaption>
+        </figure>
+
+        <figure class="gallery-item" data-category="corporales">
+          <img src="img/reduccion-medidas.jpg" alt="Reducción de medidas">
+          <figcaption>Reducción de medidas</figcaption>
+        </figure>
+      </section>
 
   <footer class="footer">
     <div class="container footer-inner">
-  <p>© <span id="year"></span> Dulce Encanto Estétic</p>
-      <p class="muted">Instagram: @dulceencanto_estetic</p>
+      <p>© <span id="year"></span> Dulce Encanto Estétic</p>
+      <div class="footer-meta">
+        <p class="muted">Instagram: @dulceencanto_estetic</p>
+        <span class="version-badge" title="Versión 1.0.0" aria-hidden="true">v1.0.0</span>
+      </div>
     </div>
   </footer>
+
+  <!-- Lightbox para ampliar imágenes de la galería -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true" aria-label="Imagen ampliada">
+    <button id="lightboxClose" class="lightbox-close" aria-label="Cerrar imagen">×</button>
+    <img id="lightboxImg" src="" alt="" />
+    <div id="lightboxCap" class="lightbox-cap" aria-live="polite"></div>
+  </div>
 
   <script src="js/app.js"></script>
 </body>
