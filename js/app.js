@@ -506,6 +506,33 @@
     });
   };
 
+  // ====== Promo Modal ======
+  const initPromoModal = () => {
+    const modal = document.getElementById('promoModal');
+    const overlay = document.getElementById('promoOverlay');
+    const closeBtn = document.getElementById('promoClose');
+    if (!modal) return;
+
+    const open = () => {
+      modal.setAttribute('aria-hidden', 'false');
+      // small delay to ensure focusable element can be focused
+      setTimeout(() => closeBtn?.focus(), 80);
+      document.body.style.overflow = 'hidden';
+    };
+    const close = () => {
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    // abrir al cargar/reiniciar la página
+    open();
+
+    // cerrar por botón, overlay o Esc
+    closeBtn?.addEventListener('click', (e) => { e.preventDefault(); close(); });
+    overlay?.addEventListener('click', () => close());
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') close(); });
+  };
+
   // ====== Init ======
   setYear();
   initMobileNav();
@@ -514,4 +541,5 @@
   initLightbox();
   initGalleryFilters();
   initPricing();
+  initPromoModal();
 })();
