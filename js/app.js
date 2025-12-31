@@ -541,5 +541,5 @@
   initLightbox();
   initGalleryFilters();
   initPricing();
-  initPromoModal();
+  // initPromoModal(); // Deshabilitado temporalmente (promoción pausada). Reactivar: descomentar esta línea.
 })();
